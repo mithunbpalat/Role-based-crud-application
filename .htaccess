@@ -1,0 +1,21 @@
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If the project is inside a subfolder, update this path.
+    # Example: RewriteBase /code3/
+    RewriteBase /code3/
+
+    # Remove access to hidden files
+    RewriteRule ^(application|system|\.git) - [F,L,NC]
+
+    # Allow direct access to existing files and directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Redirect all other requests to index.php
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+# Disable directory listing
+Options -Indexes
